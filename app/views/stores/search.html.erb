@@ -1,0 +1,29 @@
+<div class="container"> 
+  <div class="row">
+    <div class="col-xs-12 center-align">
+      <h1>New Search</h1>
+    </div>
+  </div>
+  <div class="divider" style="margin-bottom: 65px"></div>
+  <div class="row">
+    <div class="col-md-5 col-xs-12">
+      <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+      <div id="mapNewDest"></div>
+    </div>
+    <div class="col-md-7 col-xs-12">
+      <%= form_for @store, :url => {:action => "find_store"}, :html => {:class => "search_form"} do |f| %>
+        <div class="row">
+          <div class="col-xs-12 input-field">  
+            <%= f.label :formatted_address %>:
+            <%= f.text_field :formatted_address %><br />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <%= f.submit %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

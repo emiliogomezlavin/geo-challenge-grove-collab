@@ -1,6 +1,22 @@
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
+
+  def search
+    @store = Store.new
+    render :search
+  end
+
+  def find_store    
+    @store_coordinates = Geocoder.coordinates(store_params["formatted_address"])
+    render :json => { 
+         :status => :ok, 
+         :message => "Success!",
+         :data => @store_coordinates,
+         :html => "<b>congrats</b>"
+      }.to_json
+  end
+
   # GET /stores
   # GET /stores.json
   def index
@@ -69,6 +85,6 @@ class StoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
-      params.require(:store).permit(:store_name, :location, :address, :city, :state, :zip_code, :latitude, :longitude, :county)
+      params.require(:store).permit(:store_name, :location, :address, :city, :state, :zip_code, :latitude, :longitude, :county, :formatted_address)
     end
 end
