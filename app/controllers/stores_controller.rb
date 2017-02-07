@@ -9,12 +9,22 @@ class StoresController < ApplicationController
 
   def find_store    
     @store_coordinates = Geocoder.coordinates(store_params["formatted_address"])
-    render :json => { 
-         :status => :ok, 
-         :message => "Success!",
-         :data => @store_coordinates,
-         :html => "<b>congrats</b>"
-      }.to_json
+    @min_dist_store_id = Store.find_closest_store(@store_coordinates)   
+    if Store.find(@min_dist_store_id)
+      render :json => { 
+           :status => :ok, 
+           :message => "Success!",
+           :data => Store.find(@min_dist_store_id),
+           :html => "<b>congrats</b>"
+        }.to_json
+    else
+      render :json => { 
+           :status => :error, 
+           :message => "Address not found",
+           :data => nil,
+           :html => "<b>didn't work</b>"
+        }.to_json
+    end
   end
 
   # GET /stores
