@@ -8,7 +8,7 @@ class StoresController < ApplicationController
   end
 
   def find_store    
-    @store_coordinates = Geocoder.coordinates(store_params["formatted_address"])
+    @store_coordinates = Geocoder.coordinates(params["formatted_address"])
     @min_dist_store_id = Store.find_closest_store(@store_coordinates)   
     if Store.find(@min_dist_store_id)
       render :json => { 

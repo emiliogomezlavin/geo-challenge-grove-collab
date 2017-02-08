@@ -1,43 +1,92 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Stores</h1>
+<div class="container">
 
-<table>
-  <thead>
-    <tr>
-      <th>Store name</th>
-      <th>Location</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip code</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>County</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row">
+    <div class="row">
+      <div class="col-xs-6">
+        <img class="grove-collab-img" src="https://s-media-cache-ak0.pinimg.com/avatars/grovecollab_1457417881_280.jpg">
+      </div>
+      <div class="col-xs-6">
+        <h1>Find a Store near you!</h1>
+      </div>
+    </div>
+    <div class="divider" style="margin-bottom: 65px"></div>
+    <div class="row">
+      <div class="col-md-5 col-xs-12">
+        <input id="address-input" class="form-control" type="text" placeholder="Search Box">
+        <div id="map"></div>
+      </div>
+      <div class="col-md-7 col-xs-12">
+        <div class="row">
+          <form accept-charset="UTF-8" id="search_form" action="/find_store" method="post">
+            <div class="row">
+              <div class="col-md-9 input-field form-group">
+                <label for="formatted_address">Address</label>
+                <input id="formatted_address" class="form-control" name="formatted_address" type="text" placeholder="Enter your address manually" />
+                <input name="commit" type="submit" value="Find Store" class="btn btn-default text-center" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <div id="store_found" class="col-md-8 offset-md-2 text-center">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <tbody>
-    <% @stores.each do |store| %>
-      <tr>
-        <td><%= store.store_name %></td>
-        <td><%= store.location %></td>
-        <td><%= store.address %></td>
-        <td><%= store.city %></td>
-        <td><%= store.state %></td>
-        <td><%= store.zip_code %></td>
-        <td><%= store.latitude %></td>
-        <td><%= store.longitude %></td>
-        <td><%= store.county %></td>
-        <td><%= link_to 'Show', store %></td>
-        <td><%= link_to 'Edit', edit_store_path(store) %></td>
-        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="divider" style="margin-bottom: 65px"></div>
+  <div class="row">    
+    <div class="row">
+      <div class="col-md-9">
+        <h1 class="text-center">Stores</h1>
+      </div>
+      <div class="col-md-3">
+        <%= link_to 'New Store', new_store_path, :html => {:class => "text-center"} %>
+      </div>
+    </div>
 
-<br>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Store name</th>
+          <th>Location</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip code</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>County</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<%= link_to 'New Store', new_store_path %>
+      <tbody>
+        <% @stores.each do |store| %>
+          <tr>
+            <td><%= store.store_name %></td>
+            <td><%= store.location %></td>
+            <td><%= store.address %></td>
+            <td><%= store.city %></td>
+            <td><%= store.state %></td>
+            <td><%= store.zip_code %></td>
+            <td><%= store.latitude %></td>
+            <td><%= store.longitude %></td>
+            <td><%= store.county %></td>
+            <td><%= link_to 'Show', store %></td>
+            <td><%= link_to 'Edit', edit_store_path(store) %></td>
+            <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  initAutocomplete();
+</script>

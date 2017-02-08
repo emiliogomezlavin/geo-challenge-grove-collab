@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+#map {
+	height: 300px;
+	width: 100%;
+	border: 2px solid gray;
+	border-radius: 5px;
+}
+
+#store_found {
+	margin-top: 40px;
+}
+
+.grove-collab-img {
+	width: 90px;
+	height: 90px;
+}
+
+#search_form {
+	margin-left: 40px;
+}
